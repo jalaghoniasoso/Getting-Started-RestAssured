@@ -13,6 +13,22 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
+
+
+//    ------------ ჰედერების დინამიურად გადაცემა ---------------
+//HashMap<String, String> headers = new HashMap<String, String>();
+//        headers.put("header", "value1");
+//        headers.put("x-mock-match-request-headers", "header");
+//        headers.put("x-api-key", "PMAK-6776d09287e3f900011928f6-6ea05caccf7d38082ae295b37d5faee465");
+//
+//        given().
+//        baseUri("https://c4d02499-47b8-4b86-8625-2961ccf82030.mock.pstmn.io").
+//        headers(headers).
+
+
+
+
+
 public class AutomateAllHttpRequests {
     @BeforeClass
     public void beforeClass() {
