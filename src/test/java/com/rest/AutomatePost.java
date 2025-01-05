@@ -3,21 +3,19 @@ package com.rest;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.config.LogConfig;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.config;
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.with;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.matchesPattern;
 
-public class AutomateGet {
+public class AutomatePost {
     @BeforeClass
     public void beforeClass() {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
@@ -34,27 +32,43 @@ public class AutomateGet {
                 log(LogDetail.ALL);
         RestAssured.responseSpecification = responseSpecBuilder.build();
     }
+
     @Test
-    public void validate_put_request_bdd_style(){
-        String workspaceId = "bee8aa4d-7bb9-4f53-982a-14078bbd041e";
+    public void validate_post_request_bdd_style() {
         String payload = "{\n" +
                 "    \"workspace\": \n" +
                 "        {\n" +
-                "            \"name\": \"newWorkspaceName\",\n" +
+                "            \"name\": \"MyFirstWorkspace1\",\n" +
                 "            \"type\": \"personal\",\n" +
                 "            \"description\": \"Rest Assured Created this\"\n" +
                 "        }\n" +
                 "}";
         given().
                 body(payload).
-                pathParam("workspaceId", workspaceId).
         when().
-                put("/workspaces/{workspaceId}").
+                post("/workspaces").
         then().
                 log().all().
                 assertThat().
-                body("workspace.name", equalTo("newWorkspaceName"),
-                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"),
-                        "workspace.id", equalTo(workspaceId));
+                body("workspace.name", equalTo("MyFirstWorkspace1"),
+                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
+    }
+
+    @Test
+    public void validate_post_request_non_bdd_style(){
+        String payload = "{\n" +
+                "    \"workspace\": \n" +
+                "        {\n" +
+                "            \"name\": \"MyFirstWorkspace1\",\n" +
+                "            \"type\": \"personal\",\n" +
+                "            \"description\": \"Rest Assured Created this\"\n" +
+                "        }\n" +
+                "}";
+
+        Response response = with().
+                body(payload).
+                post("/workspaces");
+        assertThat(response.<String>path("workspace.name"), equalTo("MyFirstWorkspace1"));
+        assertThat(response.<String>path("workspace.id"), matchesPattern("^[a-z0-9-]{36}$"));
     }
 }

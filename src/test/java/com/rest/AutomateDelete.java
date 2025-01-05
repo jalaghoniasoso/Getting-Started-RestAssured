@@ -3,21 +3,16 @@ package com.rest;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.config.LogConfig;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.config;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.matchesPattern;
 
-public class AutomateGet {
+public class AutomateDelete {
     @BeforeClass
     public void beforeClass() {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
@@ -35,26 +30,16 @@ public class AutomateGet {
         RestAssured.responseSpecification = responseSpecBuilder.build();
     }
     @Test
-    public void validate_put_request_bdd_style(){
+    public void validate_delete_request_bdd_style(){
         String workspaceId = "bee8aa4d-7bb9-4f53-982a-14078bbd041e";
-        String payload = "{\n" +
-                "    \"workspace\": \n" +
-                "        {\n" +
-                "            \"name\": \"newWorkspaceName\",\n" +
-                "            \"type\": \"personal\",\n" +
-                "            \"description\": \"Rest Assured Created this\"\n" +
-                "        }\n" +
-                "}";
         given().
-                body(payload).
                 pathParam("workspaceId", workspaceId).
-        when().
-                put("/workspaces/{workspaceId}").
-        then().
+                when().
+                delete("/workspaces/{workspaceId}").
+                then().
                 log().all().
                 assertThat().
-                body("workspace.name", equalTo("newWorkspaceName"),
-                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"),
+                body("workspace.id", matchesPattern("^[a-z0-9-]{36}$"),
                         "workspace.id", equalTo(workspaceId));
     }
 }
