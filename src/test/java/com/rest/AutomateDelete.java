@@ -34,9 +34,9 @@ public class AutomateDelete {
         String workspaceId = "bee8aa4d-7bb9-4f53-982a-14078bbd041e";
         given().
                 pathParam("workspaceId", workspaceId).
-                when().
+        when().
                 delete("/workspaces/{workspaceId}").
-                then().
+        then().
                 log().all().
                 assertThat().
                 body("workspace.id", matchesPattern("^[a-z0-9-]{36}$"),
