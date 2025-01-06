@@ -78,41 +78,8 @@ public class AutomateAllHttpRequests {
 
     @Test
     public void automateGet(){
-//              ----------------- Get ----------------------
-//         ამით ხდება body - ის შემოწმება
-//         given().
-//                when().
-//                get("/workspaces").
-//        then().
-//                assertThat().
-//                statusCode(200).
-//                body("workspaces.name", hasItems("MyFirstWorkspace", "Hashbank", "myWorckspase"));
 
 
-
-//        აქ ხდება ცალკეული ელემენტის შემოწმება
-//        String response = given().
-//        when().
-//                get("/workspaces").
-//        then().
-//                assertThat().
-//                statusCode(200).
-//                extract().response().asString();
-//        System.out.println(JsonPath.from(response).getString("workspaces[0].name"));
-
-
-
-
-//        აქ პირდაპირ ცალკეული ელემენტი მოგვაქვს
-//        String name = given().
-//        when().
-//                get("/workspaces").
-//        then().
-//                assertThat().
-//                statusCode(200).
-//                extract().response().path("workspaces[0].name");
-//        System.out.println(name);
-//
 //        ----------------- Post ----------------------
 //    String payload = "{\n" +
 //            "    \"workspace\": \n" +
