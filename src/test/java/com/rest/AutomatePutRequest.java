@@ -48,6 +48,5 @@ public class AutomatePutRequest {
                 body("workspace.name", equalTo("testWorkSpaceFromRestAssured_001"),
                         "workspace.id", matchesPattern("^[a-z0-9-]{36}$"),
                         "workspace.id", equalTo(workspaceId));
-
     }
 }

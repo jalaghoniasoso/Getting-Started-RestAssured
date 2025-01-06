@@ -180,27 +180,7 @@ public class AutomateAllHttpRequests {
 
 
 
-//                ----------------- Put ----------------------
-        String workspaceId = "22a10221-c072-4c72-ad48-76be8cc23c87";
-        String payload = "{\n" +
-                "    \"workspace\": \n" +
-                "        {\n" +
-                "            \"name\": \"newNameFromRestAssured\",\n" +
-                "            \"type\": \"personal\",\n" +
-                "            \"description\": \"Rest Assured Created this\"\n" +
-                "        }\n" +
-                "}";
-        given().
-                body(payload).
-                pathParam("workspaceId", workspaceId).
-        when().
-                put("/workspaces/{workspaceId}").
-        then().
-                assertThat().
-                statusCode(200).
-                body("workspace.name", equalTo("newNameFromRestAssured"),
-                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"),
-                        "workspace.id", equalTo(workspaceId));
+
 
 
 
