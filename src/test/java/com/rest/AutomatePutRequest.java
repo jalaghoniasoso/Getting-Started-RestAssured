@@ -7,13 +7,11 @@ import io.restassured.http.ContentType;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.File;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesPattern;
 
-public class AutomatePostRequest {
+public class AutomatePutRequest {
     @BeforeClass
     public void beforeClass(){
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
@@ -27,41 +25,29 @@ public class AutomatePostRequest {
                 expectContentType(ContentType.JSON);
         RestAssured.responseSpecification = responseSpecBuilder.build();
     }
-@Test
-    public void automate_post_method(){
+    @Test
+    public void automate_put_method(){
+        String workspaceId = "425cb002-2156-44cf-b0e5-4111d1295364";
         String payload = "{\n" +
                 "    \"workspace\": \n" +
                 "        {\n" +
-                "            \"name\": \"MyFirstWorkspace_001\",\n" +
+                "            \"name\": \"testWorkSpaceFromRestAssured_001\",\n" +
                 "            \"type\": \"personal\",\n" +
                 "            \"description\": \"Rest Assured Created this\"\n" +
                 "        }\n" +
                 "}";
+
         given().
                 body(payload).
-                when().
-                    post("/workspaces").
+                pathParam("workspaceId", workspaceId).
+        when().
+                put("/workspaces/{workspaceId}").
                 then().
                 assertThat().
                 statusCode(200).
-                body("workspace.name", equalTo("MyFirstWorkspace_001"),
-                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
+                body("workspace.name", equalTo("testWorkSpaceFromRestAssured_001"),
+                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"),
+                        "workspace.id", equalTo(workspaceId));
 
     }
-
-//    @Test
-//    public void automate_post_method_file_object(){
-//        File file = new File("src/main/resources/CreateWorkspacePayload.json");
-//        given().
-//                body(file).
-//        when().
-//                post("/workspaces").
-//        then().
-//                assertThat().
-//                statusCode(200).
-//                body("workspace.name", equalTo("MyFirstWorkspace"),
-//                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
-//
-//    }
-
 }
