@@ -81,40 +81,6 @@ public class AutomateAllHttpRequests {
 
 
 //        ----------------- Post ----------------------
-//    String payload = "{\n" +
-//            "    \"workspace\": \n" +
-//            "        {\n" +
-//            "            \"name\": \"MyFirstWorkspace\",\n" +
-//            "            \"type\": \"personal\",\n" +
-//            "            \"description\": \"Rest Assured Created this\"\n" +
-//            "        }\n" +
-//            "}";
-//    given().
-//            body(payload).
-//    when().
-//            post("/workspaces").
-//    then().
-//            assertThat().
-//            statusCode(200).
-//            body("workspace.name", equalTo("MyFirstWorkspace"),
-//                    "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
-
-
-
-// ფაილის წაიკითხვა რესურსების ფოლდერიდან და payload ში სტატიკურად გატანის გარეშე, File ობიექტად შემოტანა
-//        File file = new File("src/main/resources/CreateWorkspacePayload.json");
-//        given().
-//                body(file).
-//        when().
-//                post("/workspaces").
-//        then().
-//                assertThat().
-//                statusCode(200).
-//                body("workspace.name", equalTo("MySecondWorkspace"),
-//                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
-
-
-
 // body - ის გატანება HashMap - ით, გამოიყენება Jackson Databind - ის დეფენდენსი
 //        HashMap<String, Object> mainObject = new HashMap<String, Object>();
 //
