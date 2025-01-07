@@ -36,11 +36,53 @@ import static org.hamcrest.Matchers.*;
 
 
 public class AutomateAllHttpRequests {
+//    @BeforeClass
+//    public void beforeClass() {
+//        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
+//                setBaseUri("https://api.postman.com").
+//                addHeader("x-api-key", "PMAK-6776d09287e3f900011928f6-6ea05caccf7d38082ae295b37d5faee465").
+//                setContentType(ContentType.JSON);
+////                log(LogDetail.ALL)
+//        RestAssured.requestSpecification = requestSpecBuilder.build();
+//
+//
+//        ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder().
+//                expectStatusCode(200).
+//                expectContentType(ContentType.JSON);
+////                log(LogDetail.ALL)
+//        RestAssured.responseSpecification = responseSpecBuilder.build();
+//    }
+
+
+
+    // Json - ის arrayList ად გატანის მაგალითი, mock სერვერის url გამოიყენება და ამიტო მაქვს ცალკე აღებული
+    ResponseSpecification customResponseSpecification;
+    @BeforeClass
+    public void beforeClass() {
+        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
+                setBaseUri("https://c4d02499-47b8-4b86-8625-2961ccf82030.mock.pstmn.io").
+                addHeader("x-mock-match-request-body", "true").
+//                setConfig(config.encoderConfig(EncoderConfig.encoderConfig()
+//                        .appendDefaultContentCharsetToContentTypeIfUndefined(false))).
+//                setContentType(ContentType.JSON);
+                setContentType("application/json;charset=utf-8");
+        RestAssured.requestSpecification = requestSpecBuilder.build();
+
+
+        ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder().
+                expectStatusCode(200).
+                expectContentType(ContentType.JSON);
+        customResponseSpecification = responseSpecBuilder.build();
+    }
+
+
     @Test
     public void automateGet(){
 
 
 //        ----------------- Post ----------------------
+
+
 // body - ის გატანება HashMap - ით, გამოიყენება Jackson Databind - ის დეფენდენსი
 //        HashMap<String, Object> mainObject = new HashMap<String, Object>();
 //
@@ -136,5 +178,47 @@ public class AutomateAllHttpRequests {
         then().spec(customResponseSpecification).
                 assertThat().
                 body("msg", equalTo("Success"));
+
+
+
+
+//                ----------------- Put ----------------------
+//        String workspaceId = "22a10221-c072-4c72-ad48-76be8cc23c87";
+//        String payload = "{\n" +
+//                "    \"workspace\": \n" +
+//                "        {\n" +
+//                "            \"name\": \"newNameFromRestAssured\",\n" +
+//                "            \"type\": \"personal\",\n" +
+//                "            \"description\": \"Rest Assured Created this\"\n" +
+//                "        }\n" +
+//                "}";
+//        given().
+//                body(payload).
+//                pathParam("workspaceId", workspaceId).
+//        when().
+//                put("/workspaces/{workspaceId}").
+//        then().
+//                assertThat().
+//                statusCode(200).
+//                body("workspace.name", equalTo("newNameFromRestAssured"),
+//                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"),
+//                        "workspace.id", equalTo(workspaceId));
+
+
+
+
+//                ----------------- Delete ----------------------
+//        String workspaceId = "22a10221-c072-4c72-ad48-76be8cc23c87";
+//        given().
+//                pathParam("workspaceId", workspaceId).
+//        when().
+//                delete("/workspaces/{workspaceId}").
+//        then().
+//                assertThat().
+//                statusCode(200).
+//                body("workspace.id", matchesPattern("^[a-z0-9-]{36}$"),
+//                        "workspace.id", equalTo(workspaceId));
+
+
     }
 }
