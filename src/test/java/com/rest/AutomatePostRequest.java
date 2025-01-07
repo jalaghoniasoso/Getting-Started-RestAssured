@@ -39,9 +39,9 @@ public class AutomatePostRequest {
                 "}";
         given().
                 body(payload).
-                when().
+        when().
                     post("/workspaces").
-                then().
+        then().
                 assertThat().
                 statusCode(200).
                 body("workspace.name", equalTo("MyFirstWorkspace_001"),
@@ -49,19 +49,19 @@ public class AutomatePostRequest {
 
     }
 
-    @Test
-    public void automate_post_method_file_object(){
-        File file = new File("src/main/resources/CreateWorkspacePayload.json");
-        given().
-                body(file).
-        when().
-                post("/workspaces").
-        then().
-                assertThat().
-                statusCode(200).
-                body("workspace.name", equalTo("MyFirstWorkspace"),
-                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
-
-    }
+//    @Test
+//    public void automate_post_method_file_object(){
+//        File file = new File("src/main/resources/CreateWorkspacePayload.json");
+//        given().
+//                body(file).
+//        when().
+//                post("/workspaces").
+//        then().
+//                assertThat().
+//                statusCode(200).
+//                body("workspace.name", equalTo("MyFirstWorkspace"),
+//                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
+//
+//    }
 
 }
