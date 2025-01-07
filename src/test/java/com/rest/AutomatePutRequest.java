@@ -42,7 +42,7 @@ public class AutomatePutRequest {
                 pathParam("workspaceId", workspaceId).
         when().
                 put("/workspaces/{workspaceId}").
-                then().
+        then().
                 assertThat().
                 statusCode(200).
                 body("workspace.name", equalTo("testWorkSpaceFromRestAssured_001"),

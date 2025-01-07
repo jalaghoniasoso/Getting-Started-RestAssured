@@ -47,7 +47,7 @@ public class AutomateSingleElemetGetMethod {
                 given().
                         when().
                         get("/workspaces").
-                        then().extract().response().asString();
+                then().extract().response().asString();
         System.out.println(JsonPath.from(response).getString("workspaces[0].name"));
     }
     @Test
@@ -56,7 +56,7 @@ public class AutomateSingleElemetGetMethod {
                 given().
                         when().
                         get("/workspaces").
-                        then().extract().response().path("workspaces[0].name");
+                then().extract().response().path("workspaces[0].name");
         System.out.println(name);
     }
 }
