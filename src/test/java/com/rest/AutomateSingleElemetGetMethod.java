@@ -19,7 +19,7 @@ public class AutomateSingleElemetGetMethod {
     public void beforeClass(){
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
                 setBaseUri("https://api.postman.com").
-                addHeader("x-api-key", "PMAK-6776d09287e3f900011928f6-6ea05caccf7d38082ae295b37d5faee465").
+                addHeader("x-api-key", "").
                 setContentType(ContentType.JSON);
         RestAssured.requestSpecification = requestSpecBuilder.build();
 
