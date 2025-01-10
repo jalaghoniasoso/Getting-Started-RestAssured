@@ -21,7 +21,7 @@ public class Assignment_Automate_Complex_JSON {
         HashMap<String, String> headers = new HashMap<String, String>();
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
                 setBaseUri("https://c4d02499-47b8-4b86-8625-2961ccf82030.mock.pstmn.io").
-                addHeader("x-api-key", "PMAK-6776d09287e3f900011928f6-6ea05caccf7d38082ae295b37d5faee465").
+                addHeader("x-api-key", "").
                 setContentType("application/json;charset=utf-8");
         RestAssured.requestSpecification = requestSpecBuilder.build();
 
